@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>A button to open an existing or create a new Product Cart for the given opportunity</description>
+    <height>250</height>
+    <label>Open a Product Cart</label>
+    <lightningComponent>RedirectToProductCart</lightningComponent>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>LightningComponent</type>
+    <width>-100</width>
+</QuickAction>

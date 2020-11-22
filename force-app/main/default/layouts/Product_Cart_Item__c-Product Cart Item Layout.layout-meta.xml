@@ -12,11 +12,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Opportunity__c</field>
+                <field>Product_Cart__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Product__c</field>
+                <field>Product_Cart_Products__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Product__c</fullName>
+    <fullName>Product_Cart_Products__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>Product</label>
+    <label>Product Cart Product</label>
     <referenceTo>Product2</referenceTo>
-    <relationshipLabel>Product Carts</relationshipLabel>
+    <relationshipLabel>Product Cart Items</relationshipLabel>
     <relationshipName>Product_Cart_Products</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
