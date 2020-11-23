@@ -1,0 +1,21 @@
+<template>
+    <h3 class="slds-text-heading_medium">Filters</h3>
+    <section>
+        <h3 class="slds-text-heading_small">Family</h3>
+        <template if:true={productFamilies.data}>
+            <c-cart-checkbox-filters filters-list={productFamilies.data}></c-cart-checkbox-filters>
+        </template>
+        <template if:true={productFamilies.error}>
+            Error loading product Families. {productFamilies.error}
+        </template>
+    </section>
+    <section>
+        <h3 class="slds-text-heading_small">Product Type</h3>
+        <template if:true={productTypes.data}>
+            <c-cart-checkbox-filters filters-list={productTypes.data}></c-cart-checkbox-filters>
+        </template>
+        <template if:true={productTypes.error}>
+            Error loading product Types. {productTypes.error}
+        </template>
+    </section>
+</template>

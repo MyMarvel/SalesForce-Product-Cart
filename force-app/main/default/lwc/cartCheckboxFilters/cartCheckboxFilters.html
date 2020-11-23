@@ -1,0 +1,13 @@
+<template>
+    <template for:each={filtersList.values} for:item="filter">
+        <lightning-input
+            key={filter.value}
+            label={filter.label}
+            data-filter="families"
+            data-value={filter.value}
+            type="checkbox"
+            checked
+            onchange={handleCheckboxChange}
+        ></lightning-input>
+    </template>
+</template>
