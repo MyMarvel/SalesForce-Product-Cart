@@ -1,0 +1,40 @@
+<template>
+	<lightning-card title="Products" icon-name="utility:products">
+		<div class="slds-card__body_inner">
+			<template if:true={products.data}>
+                <!-- Start 
+                <lightning-input type="search"
+                    onchange={handleSearchTermChange}
+                    variant="label-hidden"
+                    class="slds-var-m-bottom_small"
+                    label="Search"
+                    placeholder="Search for bears"
+                    value={searchTerm}>
+                </lightning-input>
+                 -->
+                <template if:true={products.data.records.length}>
+                    <lightning-layout multiple-rows="true" pull-to-boundary="small">
+                        <template for:each={products.data.records} for:item="product">
+                            <lightning-layout-item key={product.Id} size="3" class="slds-var-p-around_x-small">
+                                <c-cart-product-tile product={product}>asd</c-cart-product-tile>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </template>
+                <!-- When no records found: -->
+                <template if:false={hasResults}>
+                    <div class="slds-align_absolute-center slds-var-m-vertical_small">
+                        This is very disturbing, we did not find results...
+                    </div>
+                </template>
+			</template>
+			<!-- End bear list -->
+			<!-- Data failed to load -->
+			<template if:true={products.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the bear list
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>
