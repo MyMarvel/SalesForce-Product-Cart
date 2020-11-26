@@ -2,11 +2,6 @@
 <StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <sorted>false</sorted>
     <standardValue>
-        <fullName>None</fullName>
-        <default>false</default>
-        <label>None</label>
-    </standardValue>
-    <standardValue>
         <fullName>Yamaha</fullName>
         <default>false</default>
         <label>Yamaha</label>
@@ -50,5 +45,10 @@
         <fullName>Triumph</fullName>
         <default>false</default>
         <label>Triumph</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
     </standardValue>
 </StandardValueSet>
