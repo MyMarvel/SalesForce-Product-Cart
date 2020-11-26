@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>FilterProductCart</masterLabel>
+    <isExposed>true</isExposed>
+    <description>A channel for messages about filtering products on the Product cart page.</description>
+    <lightningMessageFields>
+        <fieldName>filters</fieldName>
+        <description>The current set of filters to use.</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

@@ -1,13 +1,23 @@
 <template>
+    <lightning-input
+        label='All'
+        data-filter={filtersGroupName}
+        data-value='All'
+        type="checkbox"
+        checked={isCheckboxAllChecked}
+        onchange={handleCheckboxChangeAll}
+        class="checkboxall"
+    ></lightning-input>
     <template for:each={filtersList.values} for:item="filter">
         <lightning-input
             key={filter.value}
             label={filter.label}
-            data-filter="families"
+            data-filter={filtersGroupName}
             data-value={filter.value}
             type="checkbox"
-            checked
+            checked={otherCheckboxesChecked}
             onchange={handleCheckboxChange}
+            class="checkboxfilter"
         ></lightning-input>
     </template>
 </template>
