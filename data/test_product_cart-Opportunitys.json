@@ -1,0 +1,13 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Opportunity",
+                "referenceId": "OpportunityRef1"
+            },
+            "Name": "The First Opportunity",
+            "StageName": "Prospecting",
+            "CloseDate": "2020-11-21"
+        }
+    ]
+}

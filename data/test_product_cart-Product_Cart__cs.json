@@ -1,0 +1,11 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Product_Cart__c",
+                "referenceId": "Product_Cart__cRef1"
+            },
+            "Opportunity__c": "@OpportunityRef1"
+        }
+    ]
+}

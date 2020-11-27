@@ -1,0 +1,18 @@
+[
+    {
+        "sobject": "Opportunity",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "test_product_cart-Opportunitys.json"
+        ]
+    },
+    {
+        "sobject": "Product_Cart__c",
+        "saveRefs": false,
+        "resolveRefs": true,
+        "files": [
+            "test_product_cart-Product_Cart__cs.json"
+        ]
+    }
+]
