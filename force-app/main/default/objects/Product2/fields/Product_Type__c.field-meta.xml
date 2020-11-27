@@ -36,19 +36,14 @@
                 <label>Sport Touring</label>
             </value>
             <value>
-                <fullName>Dual Sport</fullName>
+                <fullName>Dual Purpose</fullName>
                 <default>false</default>
-                <label>Dual Sport</label>
+                <label>Dual Purpose</label>
             </value>
             <value>
                 <fullName>Scooter</fullName>
                 <default>false</default>
                 <label>Scooter</label>
-            </value>
-            <value>
-                <fullName>Moped</fullName>
-                <default>false</default>
-                <label>Moped</label>
             </value>
             <value>
                 <fullName>Off-road</fullName>
