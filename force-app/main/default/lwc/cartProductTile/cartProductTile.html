@@ -1,6 +1,17 @@
 <template>
 	<lightning-card title={product.Name} class="product-tile">
-        <img src={product.Product_Image_URL__c} alt={product.Name} />
-        <p class="slds-p-horizontal_small slds-truncate">{product.Description}</p>
+                <div slot="actions">
+                        <lightning-button-icon
+                                icon-name="utility:search"
+                                icon-class="bear-tile-button"
+                                variant="bare"
+                                alternative-text="Open record"
+                                onclick={handleOpenRecordClick}>
+                        </lightning-button-icon>
+                </div>
+                <div class="slds-var-p-horizontal_small bear-tile-body">
+                        <img src={product.Product_Image_URL__c} alt={product.Name} />
+                        <p class="slds-p-horizontal_small slds-truncate">{product.Description}</p>
+                </div>
 	</lightning-card>
 </template>

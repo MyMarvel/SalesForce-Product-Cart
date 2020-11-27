@@ -4,6 +4,10 @@
     <isExposed>true</isExposed>
     <description>A channel for messages about filtering products on the Product cart page.</description>
     <lightningMessageFields>
+        <fieldName>filtersGroupName</fieldName>
+        <description>Name of set of filters to use.</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
         <fieldName>filters</fieldName>
         <description>The current set of filters to use.</description>
     </lightningMessageFields>

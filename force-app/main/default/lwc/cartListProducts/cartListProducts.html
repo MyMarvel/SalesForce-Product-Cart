@@ -14,7 +14,7 @@
             <lightning-layout multiple-rows="true" pull-to-boundary="small">
                 <template for:each={products.data.records} for:item="product">
                     <lightning-layout-item key={product.Id} size="3" class="slds-var-p-around_x-small">
-                        <c-cart-product-tile product={product}>asd</c-cart-product-tile>
+                        <c-cart-product-tile product={product} onproductview={handleProductView}></c-cart-product-tile>
                     </lightning-layout-item>
                 </template>
             </lightning-layout>
@@ -30,7 +30,7 @@
     <!-- Data failed to load -->
     <template if:true={products.error}>
         <div class="slds-text-color_error">
-            An error occurred while loading the bear list
+            An error occurred while loading the Product Cart list: "{products.error.body.message}"
         </div>
     </template>
 </template>

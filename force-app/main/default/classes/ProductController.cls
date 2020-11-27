@@ -5,50 +5,40 @@ public with sharing class ProductController {
         @AuraEnabled
         public String searchKey { get; set; }
         @AuraEnabled
-        public Decimal maxPrice { get; set; }
+        public String[] types { get; set; }
         @AuraEnabled
-        public String[] categories { get; set; }
-        @AuraEnabled
-        public String[] materials { get; set; }
-        @AuraEnabled
-        public String[] levels { get; set; }
+        public String[] families { get; set; }
     }
 
     @AuraEnabled(Cacheable=true)
     public static PagedResult getProducts(Filters filters, Integer pageNumber) {
-        String key, whereClause = '';
-        Decimal maxPrice;
-        String[] categories, materials, levels, criteria = new List<String>{};
-        /*
+        System.debug('getProduct was launched');
+        String searchKey, whereClause = '';
+        String[] types = new List<String>{}, families = new List<String>{}, criteria = new List<String>{};
+
         if (filters != null) {
-            maxPrice = filters.maxPrice;
-            materials = filters.materials;
-            levels = filters.levels;
             if (!String.isEmpty(filters.searchKey)) {
-                key = '%' + filters.searchKey + '%';
-                criteria.add('Name LIKE :key');
+                searchKey = '%' + filters.searchKey + '%';
+                criteria.add('Name LIKE :searchKey');
             }
-            if (filters.maxPrice >= 0) {
-                maxPrice = filters.maxPrice;
-                criteria.add('MSRP__c <= :maxPrice');
+            if (filters.types != null && filters.types.size() > 0) {
+                types = filters.types;
+                criteria.add('Product_Type__c IN :types');
             }
-            if (filters.categories != null) {
-                categories = filters.categories;
-                criteria.add('Category__c IN :categories');
-            }
-            if (filters.levels != null) {
-                levels = filters.levels;
-                criteria.add('Level__c IN :levels');
-            }
-            if (filters.materials != null) {
-                materials = filters.materials;
-                criteria.add('Material__c IN :materials');
+            if (filters.families != null && filters.families.size() > 0) {
+                families = filters.families;
+                criteria.add('Family IN :families');
             }
             if (criteria.size() > 0) {
                 whereClause = 'WHERE ' + String.join(criteria, ' AND ');
             }
         }
-        */
+        System.debug('getProduct WHERE clause: '
+            + whereClause
+                .replace(':types',  String.join(types, ','))
+                .replace(':families',  String.join(families, ','))
+        );
+
         Integer pageSize = ProductController.PAGE_SIZE;
         Integer offset = (pageNumber - 1) * pageSize;
         PagedResult result = new PagedResult();
@@ -63,6 +53,7 @@ public with sharing class ProductController {
             ' WITH SECURITY_ENFORCED' +
             ' ORDER BY Name LIMIT :pageSize OFFSET :offset'
         );
+        System.debug('getProduct count records: ' + String.valueOf(result.totalItemCount));
         return result;
     }
 

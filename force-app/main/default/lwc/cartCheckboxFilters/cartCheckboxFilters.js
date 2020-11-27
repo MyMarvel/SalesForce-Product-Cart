@@ -5,7 +5,7 @@ import { publish, MessageContext } from 'lightning/messageService';
 import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/FilterProductCart__c';
 
 // The delay used when debouncing event handlers before firing the event
-const DELAY = 350;
+const DELAY = 100;
 
 export default class CartCheckboxFilters extends LightningElement {
     @api filtersList;
@@ -13,39 +13,70 @@ export default class CartCheckboxFilters extends LightningElement {
     @track isCheckboxAllChecked = true;
     @track otherCheckboxesChecked = true;
 
-    filters = [];
+    currentFilters = new Array();
 
     @wire(MessageContext) messageContext;
 
+    connectedCallback() {
+        this.currentFilters = this.filtersList.values.map(
+            (item) => item.value
+        );
+    }
+
     handleCheckboxChange(event) {
-        return;
-        if (!this.filters.categories) {
-            // Lazy initialize filters with all values initially set
-            this.filters = this.filtersList.values.map(
-                (item) => item.value
-            );
-        }
-        const value = event.target.dataset.value;
-        const filterArray = this.filters[event.target.dataset.filter];
+        let value = event.target.dataset.value;
         if (event.target.checked) {
-            if (!filterArray.includes(value)) {
-                filterArray.push(value);
+            // Add it to the current values list
+            if (!this.currentFilters.includes(value)) {
+                this.currentFilters.push(value);
             }
         } else {
-            this.filters[event.target.dataset.filter] = filterArray.filter(
+            // Remove it from the current values list
+            this.currentFilters = this.currentFilters.filter(
                 (item) => item !== value
             );
         }
         // Published ProductsFiltered message
-        publish(this.messageContext, PRODUCTS_FILTERED_MESSAGE, {
-            filters: this.filters,
-            filtersGroupName: this.filtersGroupName
-        });
+        this.fireFilterChangeEvent();
     }
 
     handleCheckboxChangeAll(event) {
         this.isCheckboxAllChecked = !this.isCheckboxAllChecked;
         this.otherCheckboxesChecked = this.isCheckboxAllChecked;
+        // The change of otherCheckboxesChecked variable does not trigger the 'changed' event on the checkboxes
+        // for some reason, therefore no handleCheckboxChange is fired and productList is not updated
+        // I have to manually update the state of the triggers and send a new message to the list component
+        if (this.isCheckboxAllChecked) {
+            // Let Apex class know we checked all checkboxes
+            this.currentFilters = this.filtersList.values.map(
+                (item) => item.value
+            );
+        }
+        else {
+            this.currentFilters = [];
+        }
+        this.fireFilterChangeEvent();
     }
 
+    delayedFireFilterChangeEvent() {
+        // Debouncing this method: Do not actually fire the event as long as this function is
+        // being called within a delay of DELAY. This is to avoid a very large number of Apex
+        // method calls in components listening to this event.
+        window.clearTimeout(this.delayTimeout);
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
+        this.delayTimeout = setTimeout(() => {
+            // Published ProductsFiltered message
+            publish(this.messageContext, PRODUCTS_FILTERED_MESSAGE, {
+                filtersGroupName: this.filtersGroupName,
+                filters: this.currentFilters,
+            });
+        }, DELAY);
+    }
+
+    fireFilterChangeEvent() {
+        publish(this.messageContext, PRODUCTS_FILTERED_MESSAGE, {
+            filtersGroupName: this.filtersGroupName,
+            filters: this.currentFilters,
+        });
+    }
 }

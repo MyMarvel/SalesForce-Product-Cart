@@ -1,7 +1,7 @@
 {
   "orgName": "npetrov company",
   "edition": "Developer",
-  "features": [],
+  "features": ["DebugApex"],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true

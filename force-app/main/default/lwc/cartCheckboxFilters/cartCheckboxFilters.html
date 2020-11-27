@@ -6,7 +6,6 @@
         type="checkbox"
         checked={isCheckboxAllChecked}
         onchange={handleCheckboxChangeAll}
-        class="checkboxall"
     ></lightning-input>
     <template for:each={filtersList.values} for:item="filter">
         <lightning-input
@@ -17,7 +16,6 @@
             type="checkbox"
             checked={otherCheckboxesChecked}
             onchange={handleCheckboxChange}
-            class="checkboxfilter"
         ></lightning-input>
     </template>
 </template>
