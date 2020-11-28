@@ -9,4 +9,8 @@ export default class CartProductTile extends LightningElement {
         });
         this.dispatchEvent(selectEvent);
     }
+
+    handleAddToCartClick() {
+        alert('okay :(');
+    }
 }

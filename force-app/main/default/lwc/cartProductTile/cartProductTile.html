@@ -1,17 +1,12 @@
 <template>
 	<lightning-card title={product.Name} class="product-tile">
-                <div slot="actions">
-                        <lightning-button-icon
-                                icon-name="utility:search"
-                                icon-class="bear-tile-button"
-                                variant="bare"
-                                alternative-text="Open record"
-                                onclick={handleOpenRecordClick}>
-                        </lightning-button-icon>
-                </div>
                 <div class="slds-var-p-horizontal_small bear-tile-body">
                         <img src={product.Product_Image_URL__c} alt={product.Name} />
-                        <p class="slds-p-horizontal_small slds-truncate">{product.Description}</p>
+                        <p class="slds-var-p-horizontal_small slds-truncate">{product.Description}</p>
+                        <lightning-button-group>
+                                <lightning-button variant="brand" label="Add To Cart" title="Save this product to your product cart to save it to the opportunity later" onclick={handleAddToCartClick} class="slds-var-m-left_x-small"></lightning-button>
+                                <lightning-button label="View record" title="Open a product view page" onclick={handleOpenRecordClick} class="slds-var-m-left_x-small"></lightning-button>
+                        </lightning-button-group>
                 </div>
 	</lightning-card>
 </template>

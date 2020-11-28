@@ -8,12 +8,15 @@ import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/FilterProductC
 
 export default class CartListProducts extends NavigationMixin(LightningElement) {
     searchTerm = '';
-    hasResults = true;
     pageNumber = 1;
     @track filters = { searchKey: '', types: [], families: [] };
 
     @wire(getProducts, {filters: '$filters', pageNumber: '$pageNumber'})
     products;
+
+    get hasResults() {
+		return (this.products.data.length > 0);
+    }
 
     @wire(MessageContext) messageContext;
 
