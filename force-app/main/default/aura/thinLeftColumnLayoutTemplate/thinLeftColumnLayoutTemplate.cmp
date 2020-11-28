@@ -1,0 +1,20 @@
+<aura:component implements="lightning:AppHomeTemplate" description="Header, thin Left Column and a flexible main area">
+    <aura:attribute name="top" type="Aura.Component[]" />
+    <aura:attribute name="left" type="Aura.Component[]" />
+    <aura:attribute name="right" type="Aura.Component[]" />
+
+    <div>
+        <div>
+            {!v.top}
+        </div>
+        <lightning:layout>
+            <lightning:layoutItem size="{! $Browser.isDesktop ? '2' : '6' }" class="slds-var-m-right_small">
+                {!v.left}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" class="slds-var-m-left_small">
+                {!v.right}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+
+</aura:component>

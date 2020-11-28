@@ -1,0 +1,19 @@
+/*
+I don't need it anymore since I discovered slds-theme_default class. However, it is useful to remember for design tokens too.
+.filters {
+    background: var(--lwc-colorBackgroundAlt);
+}
+*/
+
+/*
+TODO: How to correctly alter the left column width for my header and left sidebar template?
+Right now it is 4/12 vs 8/12, I want 2/12 and 10/12 proportions.
+*/
+
+.filters__block__title {
+    text-transform: uppercase;
+}
+
+.filters__block__body {
+    padding-left: 0.5em;
+}

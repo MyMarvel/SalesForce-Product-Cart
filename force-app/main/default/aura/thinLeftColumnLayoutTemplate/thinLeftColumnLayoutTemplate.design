@@ -1,0 +1,10 @@
+<design:component label="Header, thin Left Column and Main area Page Template">
+    <flexipage:template >
+        <flexipage:region name="left" label="Left Column" defaultWidth="SMALL" />
+        <flexipage:region name="right" label="Right Column" defaultWidth="MEDIUM"/>
+    </flexipage:template>
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Small"/>
+        <design:supportedFormFactor type="Large"/>
+    </design:supportedFormFactors>
+</design:component>
