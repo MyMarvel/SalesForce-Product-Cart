@@ -4,5 +4,34 @@
         type="checkbox"
         checked={applyProductFilters}
         onchange={handleApplyProductFiltersChange}
-    ></lightning-input>    
+    ></lightning-input>
+    <template if:true={cartProducts.data}>
+        <template if:true={cartProducts.data.records.length}>
+            <lightning-layout multiple-rows="true" pull-to-boundary="small" vertical-align="stretch">
+                <template for:each={cartProducts.data.records} for:item="product">
+                    <lightning-layout-item key={product.Id} size="3" class="slds-var-p-around_x-small">
+                        <c-cart-product-tile product={product}></c-cart-product-tile>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+        <!-- When no records found: -->
+        <template if:false={cartProducts.data.records.length}>
+            <div class="slds-var-m-vertical_small">
+                <template if:true={applyProductFilters}>
+                    No products were found matching your selection.
+                </template>
+                <template if:false={applyProductFilters}>
+                    There are no products in your cart.
+                </template>
+            </div>
+        </template>
+    </template>
+    <!-- End bear list -->
+    <!-- Data failed to load -->
+    <template if:true={cartProducts.error}>
+        <div class="slds-text-color_error">
+            An error occurred while loading the Product Cart list: "{cartProducts.error.body.message}"
+        </div>
+    </template> 
 </template>

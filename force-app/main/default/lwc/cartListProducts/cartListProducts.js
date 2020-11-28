@@ -1,4 +1,3 @@
-import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement, wire, track } from 'lwc';
 // My custom Apex controller
 import getProducts from '@salesforce/apex/ProductController.getProducts';
@@ -6,17 +5,13 @@ import getProducts from '@salesforce/apex/ProductController.getProducts';
 import { subscribe, MessageContext } from 'lightning/messageService';
 import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/FilterProductCart__c';
 
-export default class CartListProducts extends NavigationMixin(LightningElement) {
+export default class CartListProducts extends LightningElement {
     searchTerm = '';
     pageNumber = 1;
     @track filters = { searchKey: '', types: [], families: [] };
 
     @wire(getProducts, {filters: '$filters', pageNumber: '$pageNumber'})
     products;
-
-    get hasResults() {
-		return (this.products.data.length > 0);
-    }
 
     @wire(MessageContext) messageContext;
 
@@ -44,18 +39,4 @@ export default class CartListProducts extends NavigationMixin(LightningElement) 
         console.log(JSON.stringify(this.filters));
         this.pageNumber = 1;
     }
-
-	handleProductView(event) {
-		// Get product record id from productview event
-		const productId = event.detail;
-		// Navigate to product record page
-		this[NavigationMixin.Navigate]({
-			type: 'standard__recordPage',
-			attributes: {
-				recordId: productId,
-				objectApiName: 'Product2',
-				actionName: 'view',
-			},
-		});
-	}
 }

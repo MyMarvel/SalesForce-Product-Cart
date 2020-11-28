@@ -1,8 +1,8 @@
 <template>
 	<lightning-card title={product.Name} class="product-tile">
-                <div class="slds-var-p-horizontal_small bear-tile-body">
-                        <img src={product.Product_Image_URL__c} alt={product.Name} />
-                        <p class="slds-var-p-horizontal_small slds-truncate">{product.Description}</p>
+                <div class="product slds-var-p-horizontal_small bear-tile-body">
+                        <div class="product__image"><img src={product.Product_Image_URL__c} alt={product.Name} /></div>
+                        <div class="slds-var-p-around_small slds-truncate">{product.Description}</div>
                         <lightning-button-group>
                                 <lightning-button variant="brand" label="Add To Cart" title="Save this product to your product cart to save it to the opportunity later" onclick={handleAddToCartClick} class="slds-var-m-left_x-small"></lightning-button>
                                 <lightning-button label="View record" title="Open a product view page" onclick={handleOpenRecordClick} class="slds-var-m-left_x-small"></lightning-button>
