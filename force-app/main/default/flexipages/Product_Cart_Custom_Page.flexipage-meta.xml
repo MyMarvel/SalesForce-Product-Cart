@@ -26,9 +26,22 @@
                 <componentName>force:highlightsPanel</componentName>
             </componentInstance>
         </itemInstances>
+        <name>header</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>productCartWrapper</componentName>
+                <componentName>cartProductFilters</componentName>
+            </componentInstance>
+        </itemInstances>
+        <name>sidebar</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>cartListProducts</componentName>
             </componentInstance>
         </itemInstances>
         <name>main</name>
@@ -37,7 +50,7 @@
     <masterLabel>Product Cart Custom Page</masterLabel>
     <sobjectType>Product_Cart__c</sobjectType>
     <template>
-        <name>flexipage:recordHomeSingleColNoHeaderTemplateDesktop</name>
+        <name>flexipage:recordHomeLeftSidebarTemplateDesktop</name>
         <properties>
             <name>enablePageActionConfig</name>
             <value>false</value>
