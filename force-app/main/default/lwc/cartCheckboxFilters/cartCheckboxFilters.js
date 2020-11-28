@@ -5,7 +5,7 @@ import { publish, MessageContext } from 'lightning/messageService';
 import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/FilterProductCart__c';
 
 // The delay used when debouncing event handlers before firing the event
-const DELAY = 100;
+const DELAY = 300;
 
 export default class CartCheckboxFilters extends LightningElement {
     @api filtersList;
@@ -37,7 +37,7 @@ export default class CartCheckboxFilters extends LightningElement {
             );
         }
         // Published ProductsFiltered message
-        this.fireFilterChangeEvent();
+        this.delayedFireFilterChangeEvent();
     }
 
     handleCheckboxChangeAll(event) {
@@ -55,7 +55,7 @@ export default class CartCheckboxFilters extends LightningElement {
         else {
             this.currentFilters = [];
         }
-        this.fireFilterChangeEvent();
+        this.delayedFireFilterChangeEvent();
     }
 
     delayedFireFilterChangeEvent() {

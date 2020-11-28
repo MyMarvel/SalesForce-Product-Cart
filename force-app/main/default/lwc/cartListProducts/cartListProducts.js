@@ -38,7 +38,7 @@ export default class CartListProducts extends NavigationMixin(LightningElement) 
         let tmp = { searchKey: this.filters.searchKey,  types: this.filters.types, families: this.filters.families };
         tmp[message.filtersGroupName] = message.filters;
         this.filters = tmp;
-        //alert(JSON.stringify(this.filters));
+        console.log(JSON.stringify(this.filters));
         this.pageNumber = 1;
     }
 
