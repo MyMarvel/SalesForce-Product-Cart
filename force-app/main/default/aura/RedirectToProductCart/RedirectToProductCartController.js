@@ -33,6 +33,12 @@
             }
             // Display the message to console
             console.error(message);
+            $A.get("e.force:closeQuickAction").fire();
+            component.find('notify').showToast({
+                "variant": "error",
+                "title": "Error",
+                "message": message
+            });
           }
         });
         $A.enqueueAction(action);
