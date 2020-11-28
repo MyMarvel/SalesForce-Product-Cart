@@ -1,0 +1,38 @@
+/*
+ * A CSS trick to crop product images to a static dimensions (I choose 66% as the most common aspect ratio 1:1.5 for images in my dataset)
+ * See https://stackoverflow.com/questions/51447317/image-height-same-as-width for details.
+ */
+
+.product__image {
+    position: relative;
+}
+
+.product__image:after {
+    content: "";
+    display: block;
+    padding-bottom: 66%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+}
+ 
+.product__image img {
+    position: absolute; /* Take your picture out of the flow */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; /* Make the picture taking the size of it's parent */
+    width: 100%; /* This if for the object-fit */
+    height: 100%; /* This if for the object-fit */
+    object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+    object-position: center;
+}
+
+/**
+ * End of snippet.
+ */
+
+.product-tile {
+    min-width: 150px;
+}
+
+.product {
+    text-align: center;
+}
