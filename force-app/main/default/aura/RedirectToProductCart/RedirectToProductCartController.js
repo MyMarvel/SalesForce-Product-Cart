@@ -3,18 +3,38 @@
 
     },
 
-    doInit: function(cmp) {
-        // Get user id
-        // Get opportunity id
+    doInit: function(component) {
+        // Get user id & opportunity id
+        let oppID = component.get("v.recordId");
+        var userID = $A.get("$SObjectType.CurrentUser.Id");
         // Load product cart obj for this user in the backend, return cart id
-        let cartId = 'a00P0000006TulkIAC';
-        // TODO: Figure out how to render a link to a record by it's id without hardcoding the path
-        //$A.get("e.force:navigateToURL").setParams({"url": "lightning/r/Product_Cart__c/" + cartId +  "/view" + "&retURL=" + encURI()}).fire();
-        let navEvt = $A.get("e.force:navigateToSObject");
-        navEvt.setParams({
-          "recordId": cartId,
-          "slideDevName": "related"
+        // Call apex class method
+        var action = component.get('c.getOpportunityProductCart');
+        action.setParams({ opportunityID : oppID, currentUserID: userID });
+        action.setCallback(this, function(response) {
+          //Get state of response
+          var state = response.getState();
+          if (state === "SUCCESS") {
+              // Redirect user to the Cart
+              let cartId = response.getReturnValue();
+              let navEvt = $A.get("e.force:navigateToSObject");
+              navEvt.setParams({
+                "recordId": cartId,
+                "slideDevName": "related"
+              });
+              navEvt.fire();
+          }
+          else if (state === "ERROR") {
+            let errors = response.getError();
+            let message = 'Unknown error'; // Default error message
+            // Retrieve the error message sent by the server
+            if (errors && Array.isArray(errors) && errors.length > 0) {
+                message = errors[0].message;
+            }
+            // Display the message to console
+            console.error(message);
+          }
         });
-        navEvt.fire();
+        $A.enqueueAction(action);
     }
 })
