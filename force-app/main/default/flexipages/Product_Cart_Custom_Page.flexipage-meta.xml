@@ -41,7 +41,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>cartListProducts</componentName>
+                <componentName>cartAccordeonBody</componentName>
             </componentInstance>
         </itemInstances>
         <name>main</name>

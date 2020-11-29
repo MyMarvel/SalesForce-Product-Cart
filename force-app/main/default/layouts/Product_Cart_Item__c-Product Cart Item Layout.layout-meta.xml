@@ -16,7 +16,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Product_Cart_Products__c</field>
+                <field>Product_Cart_Product__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
