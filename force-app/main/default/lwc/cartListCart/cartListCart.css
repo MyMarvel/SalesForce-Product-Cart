@@ -1,0 +1,7 @@
+.checkout-button {
+    color: white;
+}
+
+.cart__products {
+    background: var(--lwc-colorBackground);
+}

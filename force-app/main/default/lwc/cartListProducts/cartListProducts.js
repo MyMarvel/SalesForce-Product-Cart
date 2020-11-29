@@ -1,7 +1,6 @@
 import { LightningElement, wire, track } from 'lwc';
 // My custom Apex controller
 import getProducts from '@salesforce/apex/ProductController.getProducts';
-// Ligthning Message Service and a message channel
 import { subscribe, MessageContext } from 'lightning/messageService';
 import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/FilterProductCart__c';
 
@@ -22,11 +21,11 @@ export default class CartListProducts extends LightningElement {
         this.productFilterSubscription = subscribe(
             this.messageContext,
             PRODUCTS_FILTERED_MESSAGE,
-            (message) => this.handleFilterChange(message)
+            (message) => this.handleFilterChangeMessage(message) 
         );
     }
 
-    handleFilterChange(message) {
+    handleFilterChangeMessage(message) {
         // TODO: This doesn't trigger the Apex class update, dont know why, I did use @track as described in the documentation 
         // https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reactivity_fields
         // this.filters[message.filtersGroupName] = message.filters;

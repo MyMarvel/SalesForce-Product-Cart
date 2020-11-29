@@ -8,13 +8,17 @@ public with sharing class ProductController {
         public String[] types { get; set; }
         @AuraEnabled
         public String[] families { get; set; }
+        @AuraEnabled
+        public Boolean restrictToProductIDs { get; set; }
+        @AuraEnabled
+        public String[] productIDs { get; set; }
     }
 
     @AuraEnabled(Cacheable=true)
     public static PagedResult getProducts(Filters filters, Integer pageNumber) {
         System.debug('getProduct was launched');
         String searchKey, whereClause = '';
-        String[] types = new List<String>{}, families = new List<String>{}, criteria = new List<String>{};
+        String[] types = new List<String>{}, families = new List<String>{}, criteria = new List<String>{}, productIDs = new List<String>{};
 
         if (filters != null) {
             if (!String.isEmpty(filters.searchKey)) {
@@ -28,6 +32,13 @@ public with sharing class ProductController {
             if (filters.families != null && filters.families.size() > 0) {
                 families = filters.families;
                 criteria.add('Family IN :families');
+            }
+            if (filters.restrictToProductIDs != null
+            && filters.restrictToProductIDs == true
+            && filters.productIDs != null
+            && filters.productIDs.size() > 0) {
+                productIDs = filters.productIDs;
+                criteria.add('Id IN :productIDs');
             }
             if (criteria.size() > 0) {
                 whereClause = 'WHERE ' + String.join(criteria, ' AND ');

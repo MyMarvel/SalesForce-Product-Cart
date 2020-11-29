@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>ProductCartChanged</masterLabel>
+    <isExposed>true</isExposed>
+    <description>A channel for events when a user changes his Cart (mainly add/delete products).</description>
+    <lightningMessageFields>
+        <fieldName>action</fieldName>
+        <description>Name of action happened to the Cart.</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>ProductIds</fieldName>
+        <description>List of product IDs to change.</description>
+    </lightningMessageFields>
+</LightningMessageChannel>
