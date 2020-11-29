@@ -2,10 +2,15 @@
 	<lightning-card title={product.Name} class="product-tile">
                 <div class="product slds-var-p-horizontal_small bear-tile-body">
                         <div class="product__image"><img src={product.Product_Image_URL__c} alt={product.Name} /></div>
-                        <div class="slds-var-p-around_small slds-truncate">{product.Description}</div>
+                        <div class="slds-var-p-around_small"><p class="slds-line-clamp_small">{product.Description}</p></div>
                         <lightning-button-group>
-                                <lightning-button variant="brand" label="Add To Cart" title="Save this product to your product cart to save it to the opportunity later" onclick={handleAddToCartClick} class="slds-var-m-left_x-small"></lightning-button>
-                                <lightning-button label="View record" title="Open a product view page" onclick={handleOpenRecordClick} class="slds-var-m-left_x-small"></lightning-button>
+                                <template if:true={insideCart}>
+                                        <lightning-button label="Delete From Cart" variant="destructive-text" title="Delete this product from your cart to not store it to the selected Opportunity" onclick={handleDeleteFromCartClick}></lightning-button>
+                                </template>
+                                <template if:false={insideCart}>
+                                        <lightning-button variant="brand" label="Add To Cart" title="Save this product to your product cart to save it to the opportunity later" onclick={handleAddToCartClick}></lightning-button>
+                                </template>
+                                <lightning-button label="View record" title="Open a product view page" onclick={handleOpenRecordClick}></lightning-button>
                         </lightning-button-group>
                 </div>
 	</lightning-card>

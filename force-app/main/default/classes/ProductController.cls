@@ -33,11 +33,10 @@ public with sharing class ProductController {
                 families = filters.families;
                 criteria.add('Family IN :families');
             }
-            if (filters.restrictToProductIDs != null
-            && filters.restrictToProductIDs == true
-            && filters.productIDs != null
-            && filters.productIDs.size() > 0) {
-                productIDs = filters.productIDs;
+            if (filters.restrictToProductIDs != null && filters.restrictToProductIDs == true) {
+                if (filters.productIDs != null && filters.productIDs.size() > 0) {
+                    productIDs = filters.productIDs;
+                }
                 criteria.add('Id IN :productIDs');
             }
             if (criteria.size() > 0) {

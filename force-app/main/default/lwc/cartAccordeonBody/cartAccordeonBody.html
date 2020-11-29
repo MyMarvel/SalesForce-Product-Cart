@@ -1,8 +1,8 @@
 <template>
     <div class="slds-box slds-theme_default slds-var-p-around_xx-large">
         <lightning-accordion allow-multiple-sections-open active-section-name="allProducts">
-            <lightning-accordion-section name="productCart" label="Your Cart (0)">
-                <c-cart-list-cart></c-cart-list-cart>
+            <lightning-accordion-section name="productCart" label={cartAccordeonLabel}>
+                <c-cart-list-cart oncartupdate={handleCartUpdate}></c-cart-list-cart>
             </lightning-accordion-section>
             <lightning-accordion-section name="allProducts" label="All Products">
                 <c-cart-product-search></c-cart-product-search>

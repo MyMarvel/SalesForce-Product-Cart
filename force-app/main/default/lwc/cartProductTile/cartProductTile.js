@@ -5,6 +5,7 @@ import PRODUCT_CART_CHANGED_MESSAGE from '@salesforce/messageChannel/ProductCart
 
 export default class CartProductTile extends NavigationMixin(LightningElement) {
 	@api product;
+	@api insideCart = false;
 	
 	@wire(MessageContext) messageContext;
 
@@ -24,5 +25,12 @@ export default class CartProductTile extends NavigationMixin(LightningElement) {
 			action: 'add',
 			productIDs: [this.product.Id],
 		});
-    }
+	}
+	
+	handleDeleteFromCartClick() {
+		publish(this.messageContext, PRODUCT_CART_CHANGED_MESSAGE, {
+			action: 'delete',
+			productIDs: [this.product.Id],
+		});
+	}
 }
