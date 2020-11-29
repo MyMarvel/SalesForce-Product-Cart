@@ -23,6 +23,10 @@ export default class CartListCart extends LightningElement {
         this.dispatchEvent(myEvent);
     }
 
+    get countProductsInCart() {
+        return this._filters.productIDs.length;
+    }
+
     // My main variable - cartProducts
     @wire(getProducts, {filters: '$appliedFilters', pageNumber: '$pageNumber'})
     cartProducts;

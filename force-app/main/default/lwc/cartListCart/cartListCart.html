@@ -1,14 +1,16 @@
 <template>
-    <button class="slds-button slds-button_success checkout-button" onclick={handleCheckoutClick}>Checkout this cart</button>
-    <button class="slds-button slds-button_text-destructive" onclick={handleDeleteAllClick}>Delete all products from this cart</button>
-    <lightning-input
-        label='Apply filters from the Left Column'
-        type="checkbox"
-        checked={applyProductFilters}
-        onchange={handleApplyProductFiltersChange}
-        class="slds-var-m-vertical_small"
-    ></lightning-input>
     <template if:true={cartProducts.data}>
+        <template if:true={countProductsInCart}>
+            <button class="slds-button slds-button_success checkout-button" onclick={handleCheckoutClick}>Checkout this cart</button>
+            <button class="slds-button slds-button_text-destructive" onclick={handleDeleteAllClick}>Delete all products from this cart</button>
+            <lightning-input
+                label='Apply filters from the Left Column'
+                type="checkbox"
+                checked={applyProductFilters}
+                onchange={handleApplyProductFiltersChange}
+                class="slds-var-m-vertical_small"
+            ></lightning-input>
+        </template>
         <div class="cart__products">
             <template if:true={cartProducts.data.records.length}>
                 <lightning-layout multiple-rows="true" pull-to-boundary="small" vertical-align="stretch">
@@ -32,7 +34,6 @@
             </template>
         </div>
     </template>
-    <!-- End bear list -->
     <!-- Data failed to load -->
     <template if:true={cartProducts.error}>
         <div class="slds-text-color_error">
