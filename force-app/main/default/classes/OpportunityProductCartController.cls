@@ -20,15 +20,17 @@ public with sharing class OpportunityProductCartController {
     }
 
     @AuraEnabled(Cacheable=true)
-    public static List<Product_Cart_Item__c> getCartProducts(String productCartID) {
-        // I can get the user id straight here, in Apex, but I prefer to specify it as the function's attribute for clarity and cachable
-        // Id userId = UserInfo.getUserId();
-        List<Product_Cart_Item__c> products = [
+    public static List<Id> getCartProducts(String productCartId) {
+        List<Id> productIDs = new List<Id>();
+        List<Product_Cart_Item__c> productsInCart = [
             SELECT
                 Product_Cart_Product__c
             FROM Product_Cart_Item__c
-            WHERE Id = :productCartID
+            WHERE Product_Cart__c = :productCartId
         ];
-        return products;
+        for (Product_Cart_Item__c product : productsInCart) {
+            productIDs.add(product.Id);
+        }
+        return productIDs;
     }
 }
