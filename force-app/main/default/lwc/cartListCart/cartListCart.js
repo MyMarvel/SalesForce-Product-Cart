@@ -1,22 +1,29 @@
+import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement, wire, api, track } from 'lwc';
 // Message channels
 import { subscribe, publish, MessageContext } from 'lightning/messageService';
 import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/FilterProductCart__c';
 import PRODUCT_CART_CHANGED_MESSAGE from '@salesforce/messageChannel/ProductCartChanged__c';
 // For writing Product Cart Items into database
-import { createRecord } from 'lightning/uiRecordApi';
+import { createRecord, getRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import PRODUCT_CART_ITEM_OBJECT from '@salesforce/schema/Product_Cart_Item__c';
 import PRODUCT_CART_FIELD from '@salesforce/schema/Product_Cart_Item__c.Product_Cart__c';
 import PRODUCT_FIELD from '@salesforce/schema/Product_Cart_Item__c.Product_Cart_Product__c';
 import { refreshApex } from '@salesforce/apex';
+// For cart checkout
+import CART_OPPORTUNITY_FIELD from '@salesforce/schema/Product_Cart__c.Opportunity__c';
+import CART_OBJECT from '@salesforce/schema/Product_Cart__c';
+import OPPORTUNITY_OBJECT from '@salesforce/schema/Opportunity';
 // My custom Apex controllers
 import getProducts from '@salesforce/apex/ProductController.getProducts';
 import getCartProducts from '@salesforce/apex/OpportunityProductCartController.getCartProducts';
+import checkoutCart from '@salesforce/apex/OpportunityProductCartController.saveProductCartItemAsOpportunityItems';
+
 
 const USE_DATABASE = false;
 
-export default class CartListCart extends LightningElement {
+export default class CartListCart extends NavigationMixin(LightningElement) {
     // We need a private _filters array to store all current filters from the page, because it is the only way to know
     // which filters we have to apply when a user clicks on 'Apply filters from Left Column' checkbox.
     _filters = { searchKey: '', types: [], families: [], productIDs: [], restrictToProductIDs: true };
@@ -52,6 +59,9 @@ export default class CartListCart extends LightningElement {
     confirmationMessage;
 
     @api productCartId;
+
+    @wire(getRecord, { recordId: '$productCartId', fields: [CART_OPPORTUNITY_FIELD] })
+    cartRecord;
 
     // Get initial value of products in the Cart (in case a user closed the browser and
     // then want to get back to his incomplete cart to continue his 'shopping')
@@ -217,7 +227,27 @@ export default class CartListCart extends LightningElement {
             if(event.detail !== 1){
                 if(event.detail.status === 'confirm') {
                     if (this.activeConfirmation == 'checkout') {
-                        // TODO
+                        var thisOpportunityId = this.cartRecord.data.fields.Opportunity__c.value;
+                        checkoutCart({ productCartProductIds: this.appliedFilters.productIDs, opportunityId: thisOpportunityId })
+                            .then(result => {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__recordPage',
+                                    attributes: {
+                                        recordId: thisOpportunityId,
+                                        objectApiName: OPPORTUNITY_OBJECT.apiName,
+                                        actionName: 'view',
+                                    },
+                                });
+                                this.dispatchEvent(
+                                    new ShowToastEvent({ title: 'Success', message: 'Your cart has been processed successfully.', variant: 'success' }),
+                                );
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.dispatchEvent(
+                                    new ShowToastEvent({ title: 'Error during checkout', message: error.body.message, variant: 'error', mode: 'sticky' }),
+                                );
+                            });
                     }
                     else if (this.activeConfirmation == 'deleteall') {
                         // Publish a message so our component will be aware of our intent :)
@@ -247,7 +277,7 @@ export default class CartListCart extends LightningElement {
                 })
                 .catch(error => {
                     this.dispatchEvent(
-                        new ShowToastEvent({ title: 'Error creating record', message: error.body.message, variant: 'error' }),
+                        new ShowToastEvent({ title: 'Error creating record', message: error.body.message, variant: 'error', mode: 'sticky' }),
                     );
                 });
         }

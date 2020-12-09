@@ -37,7 +37,8 @@
             component.find('notify').showToast({
                 "variant": "error",
                 "title": "Error",
-                "message": message
+                "message": message,
+                "mode": 'sticky'
             });
           }
         });

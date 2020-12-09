@@ -63,7 +63,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Product_Cart_Item__c.Product_Cart_Products__c</field>
+        <field>Product_Cart_Item__c.Product_Cart_Product__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

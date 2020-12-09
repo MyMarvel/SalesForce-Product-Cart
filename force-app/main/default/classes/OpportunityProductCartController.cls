@@ -33,4 +33,21 @@ public with sharing class OpportunityProductCartController {
         }
         return productIDs;
     }
+
+    @AuraEnabled
+    public static Boolean saveProductCartItemAsOpportunityItems(List<String> productCartProductIds, String opportunityId) {
+        List<OpportunityLineItem> opportunityLineItems = new List<OpportunityLineItem>();
+        for (String productId : productCartProductIds) {
+            // TODO: more required fields?
+            OpportunityLineItem opportunityItemRecord = new OpportunityLineItem(OpportunityId=opportunityId, Product2Id=productId);
+            opportunityLineItems.add(opportunityItemRecord);
+        }
+        try {
+            insert opportunityLineItems;
+        }
+        catch(DmlException e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+        return true;
+    }
 }
