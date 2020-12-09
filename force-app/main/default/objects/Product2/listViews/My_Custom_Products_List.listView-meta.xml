@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Custom_Products_List</fullName>
+    <columns>PRODUCT2.NAME</columns>
+    <columns>PRODUCT2.CREATED_DATE</columns>
+    <columns>PRODUCT2.DESCRIPTION</columns>
+    <columns>PRODUCT2.FAMILY</columns>
+    <columns>Product_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>My Custom Products List</label>
+</ListView>

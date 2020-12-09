@@ -41,14 +41,14 @@
                 <label>Dual Purpose</label>
             </value>
             <value>
-                <fullName>Scooter</fullName>
-                <default>false</default>
-                <label>Scooter</label>
-            </value>
-            <value>
                 <fullName>Off-road</fullName>
                 <default>false</default>
                 <label>Off-road</label>
+            </value>
+            <value>
+                <fullName>Scooter</fullName>
+                <default>false</default>
+                <label>Scooter</label>
             </value>
             <value>
                 <fullName>Other</fullName>
