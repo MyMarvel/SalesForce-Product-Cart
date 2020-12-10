@@ -17,14 +17,14 @@
         <label>BMW</label>
     </standardValue>
     <standardValue>
-        <fullName>Harley-Davidson</fullName>
-        <default>false</default>
-        <label>Harley-Davidson</label>
-    </standardValue>
-    <standardValue>
         <fullName>Suzuki</fullName>
         <default>false</default>
         <label>Suzuki</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Kawasaki</fullName>
+        <default>false</default>
+        <label>Kawasaki</label>
     </standardValue>
     <standardValue>
         <fullName>KTM</fullName>
@@ -32,14 +32,14 @@
         <label>KTM</label>
     </standardValue>
     <standardValue>
+        <fullName>Harley-Davidson</fullName>
+        <default>false</default>
+        <label>Harley-Davidson</label>
+    </standardValue>
+    <standardValue>
         <fullName>Ducati</fullName>
         <default>false</default>
         <label>Ducati</label>
-    </standardValue>
-    <standardValue>
-        <fullName>Kawasaki</fullName>
-        <default>false</default>
-        <label>Kawasaki</label>
     </standardValue>
     <standardValue>
         <fullName>Triumph</fullName>

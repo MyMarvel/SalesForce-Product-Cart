@@ -21,11 +21,6 @@
                 <label>Cruiser</label>
             </value>
             <value>
-                <fullName>Sport Bike</fullName>
-                <default>false</default>
-                <label>Sport Bike</label>
-            </value>
-            <value>
                 <fullName>Touring</fullName>
                 <default>false</default>
                 <label>Touring</label>
@@ -34,6 +29,11 @@
                 <fullName>Sport Touring</fullName>
                 <default>false</default>
                 <label>Sport Touring</label>
+            </value>
+            <value>
+                <fullName>Sport Bike</fullName>
+                <default>false</default>
+                <label>Sport Bike</label>
             </value>
             <value>
                 <fullName>Dual Purpose</fullName>
